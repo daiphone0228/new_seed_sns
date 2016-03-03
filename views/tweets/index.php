@@ -5,15 +5,26 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">つぶやき</label>
               <div class="col-sm-8">
-                <input type="text" name="age" class="form-control" placeholder="例：Hello World!">
+                <textarea name="tweet" cols="50" rows="5" class="form-control" placeholder="例：Hello World!"></textarea>
               </div>
             </div>
-          <input type="submit" class="btn btn-default" value="つぶやく">
+          <ul class="paging">
+            <input type="submit" class="btn btn-info" value="つぶやく">
+          </ul>
         </form>
       </div>
 
-    <?php foreach ($this->viewOptions as $viewOption): ?>
       <div class="col-md-8 content-margin-top">
+        <form method="get" action="" class="form-horizontal" role="form">
+          <input type="text" name="search_word" value="">
+          <input type="submit" class="btn btn-success btn-xs" value="検索">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="" class="btn btn-default">前</a></li>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <li><a href="" class="btn btn-default">次</a></li>
+        </form>
+
+        <?php foreach ($this->viewOptions as $viewOption): ?>
         <div class="msg">
           <img src="/new_seed_sns/member_picture/<?php echo $viewOption['picture_path']; ?>" width="48" height="48">
           <p>
@@ -28,4 +39,4 @@
           </p>
         </div>
       </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>

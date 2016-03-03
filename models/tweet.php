@@ -21,6 +21,33 @@
 			// 取得結果を返す
 			return $rtn;
 		}
+
+		public function login() {
+
+			if (isset($_POST) && $_POST['email'] != '' && $_POST['password'] != '') {
+				$sql =  'SELECT * FROM `members` WHERE `email` ='. $_POST['email']. 'AND `password`='. sha1($_POST['password']);
+				$record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+				if ($table = mysqli_fetch_assoc($record)) {
+					//ログイン成功
+					$_SESSION['member_id'] = $table['member_id'];
+					$_SESSION['time'] = time();
+
+					//自動ログインのボタンのチェックボックスにチェックがあったら、ログイン情報をcookieに記録する
+					if ($_POST['save'] == 'on') {
+						setcookie('email', $_POST['email'], time() + 60*60*24*14);
+						setcookie('password', $_POST['password'], time() + 60*60*24*14);
+					}
+					header('Location: index.php');
+					exit();
+				} else {
+					$error['login'] = 'failed';
+				}
+
+			} else {
+				$error['login'] = 'blank';
+			}
+
+		}
 	}
 
  ?>

@@ -9,6 +9,10 @@
 			$controller->index();
 			break;
 
+		case 'login':
+			$controller->login();
+			break;
+
 		default:
 			break;
 	}
@@ -28,6 +32,15 @@
 			$this->action = 'index';
 
 			// ビューを呼び出す
+			include('views/layout/application.php');
+		}
+
+		public function login() {
+			// $tweet = new Tweet();
+			// $this->viewOptions = $tweet->login();
+
+			$this->action = 'login';
+
 			include('views/layout/application.php');
 		}
 	}
